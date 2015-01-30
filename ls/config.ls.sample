@@ -1,0 +1,7 @@
+export config = {
+    description-files: {
+        App1: "http://localhost/static/app1-spore.json",
+        App2: "http://localhost/static/app2-spore.json",
+        App3: "http://localhoststatic/app3-spore.json"
+    }
+}

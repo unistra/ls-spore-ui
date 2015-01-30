@@ -1,0 +1,12 @@
+<accordion close-others="true">
+    <accordion-group is-open="isopen" ng-repeat="result in methctrl.results">
+        <accordion-heading class="accordion-heading">
+            {{$index}}
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        </accordion-heading>
+        <dl class="dl-horizontal" ng-repeat="(k,v) in result">
+            <dt>{{k}}</dt>
+            <dd>{{v}}</dd>
+        </dl>
+    </accordion-group>
+</accordion>

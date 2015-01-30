@@ -1,0 +1,32 @@
+<form id="{{name}}-form" name="{{name}}-form" class="form-vertical" role="form" ng-submit="methctrl.Submit(name)" novalidate ng-show="{{name}}">
+    <fieldset>
+        <legend><h3>{{sporeClient.description.methods[name].documentation ? sporeClient.description.methods[name].documentation : name}}</h3></legend>
+
+        <div class="alert alert-danger" ng-show="errors[name]"><strong>Error: </strong>{{errors[name]}}</div>
+
+        <div class="form-group required" ng-repeat="(param, value) in params.required_params">
+            <label class="control-label" for="{{name}}-{{param}}">{{param}}</label>
+            <div class="controls">
+                <input required type="text" id="{{name}}-{{param}}" name="{{name}}-{{param}}" ng-model="forms[name].required_params[param]" class="input-xlarge form-control">
+            </div>
+        </div>
+
+        <div class="form-group" ng-repeat="(param, value) in params.optional_params">
+            <label class="control-label" for="{{name}}-{{param}}">{{param}}</label>
+            <div class="controls">
+                <input type="text" id="{{name}}-{{param}}" name="{{name}}-{{param}}" ng-model="forms[name].optional_params[param]" class="input-xlarge form-control">
+            </div>
+        </div>
+
+        <div class="form-group" ng-repeat="(param, value) in params.payload">
+            <label class="control-label" for="{{name}}-{{param}}">{{param}}</label>
+            <div class="controls">
+                <input type="text" id="{{name}}-{{param}}" name="{{name}}-{{param}}" ng-model="forms[name].payload[param]" class="input-xlarge form-control">
+            </div>
+        </div>
+
+        <div class="iput-append">
+            <button id="submit" type="submit" class="btn btn-default">Search</button>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr" ng-app='spore-ui'>
+<head>
+    <title>Spore UI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content= 'Direction Informatique - Université de Strasbourg' />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/ngprogress/ngProgress.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ngprogress/build/ngProgress.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/ls-spore/build/spore-client.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+</head>
+
+<body ng-controller="methodsCtrl as methctrl">
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <img class="pull-left" src="https://django-static.u-strasbg.fr/dipstrap/latest/img/unistra-white.png" alt="unistra" />
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">{{currentClientTitle}}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clients <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="(name,value) in descriptionFiles"><a href ng-click="methctrl.Client(name)">{{value.documentation ? value.documentation : name }}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav" ng-if="sporeIsReady == true">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="(name,value) in sporeClient.description.methods"><a href ng-click="methctrl.Menu(name)">{{value.documentation ? value.documentation : name }}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <form class="navbar-form navbar-right" role="form" id="token-holder" ng-show="showAddToken" novalidate ng-submit="methctrl.AddToken(token)">
+                    <div class="form-group">
+                        <input type="text" placeholder="token" class="form-control" ng-model="token">
+                    </div>
+                    <button type="submit" class="btn btn-success">Add token</button>
+                </form>
+                <div class="navbar-right logout" ng-show="showRemoveToken">
+                    <button class="btn btn-danger" ng-click="methctrl.RemoveToken()">Remove token</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container" id="main">
+        <page-search ng-hide="hideSearch" class="pageSearch"></page-search>
+        <page-results ng-hide="hideResults" class="pageResults"></page-results>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <footer>
+            <div class="container">
+                <p class="credit">&copy; Direction Informatique - Universit&eacute; de Strasbourg - 2015</p>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
