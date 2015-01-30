@@ -9,7 +9,7 @@ controllers.controller 'methodsCtrl', ['$scope' 'constants' 'ngProgress' 'mytool
     $scope.spore-is-ready = false
     $scope.errors = {}
 
-    ngProgress.color("white")
+    ngProgress.color("green")
     ngProgress.height('5px')
 
     @Submit = (name) ->

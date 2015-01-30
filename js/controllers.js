@@ -11,7 +11,7 @@
       $scope.currentClientTitle = "Select a client";
       $scope.sporeIsReady = false;
       $scope.errors = {};
-      ngProgress.color("white");
+      ngProgress.color("green");
       ngProgress.height('5px');
       this.Submit = function(name){
         var checkParams, params, e;
