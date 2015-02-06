@@ -1,7 +1,9 @@
 ls-spore-ui
 ===========
 
-An UI for SPORE webservices based on ls-spore.
+An UI for SPORE webservices based on `ls-spore`_.
+
+.. _ls-spore: https://github.com/unistra/ls-spore
 
 
 Usage
