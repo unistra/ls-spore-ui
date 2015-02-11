@@ -4,9 +4,10 @@
             {{$index}}
             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
         </accordion-heading>
-        <dl class="dl-horizontal" ng-repeat="(k,v) in result">
-            <dt>{{k}}</dt>
-            <dd>{{v}}</dd>
+        <dl>
+            <div ng-repeat="(k,v) in result"> 
+                <show-json></show-json>
+            </div>
         </dl>
     </accordion-group>
 </accordion>

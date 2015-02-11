@@ -26,4 +26,35 @@
       templateUrl: "list-results.html"
     };
   });
+  directives.directive("showJson", function(){
+    var link;
+    link = function(scope, element, attrs){
+      var generateDom, results;
+      generateDom = function(v){
+        var r, key, value;
+        r = "";
+        if (typeof v === "object") {
+          console.log(v);
+          r += '<dl>';
+          for (key in v) {
+            value = v[key];
+            r += "<dt>" + key + "</dt>";
+            r += "<dd>";
+            r += generateDom(value);
+            r += "</dd>";
+          }
+          return r += '</dl>';
+        } else {
+          return r += v;
+        }
+      };
+      results = "<dt>" + scope.k + "</dt>";
+      results += "<dd>" + generateDom(scope.v) + "</dd>";
+      return element.html(results);
+    };
+    return {
+      restrict: "E",
+      link: link
+    };
+  });
 }).call(this);

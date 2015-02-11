@@ -10,3 +10,29 @@ directives.directive "pageResults", ->
 
 directives.directive "listResults", ->
     { restrict: "E", templateUrl: "list-results.html" }
+
+
+directives.directive "showJson", ->
+
+    link = (scope,element,attrs) ->
+
+        generateDom = (v) ->
+            r = ""
+            if typeof v == "object"
+                console.log v
+                r+='<dl>'
+                for key,value of v
+                    r += "<dt>" + key + "</dt>"
+                    r += "<dd>"
+                    r += generateDom value
+                    r += "</dd>"
+                r+='</dl>'
+            else
+                return r += v
+
+        results = "<dt>" + scope.k + "</dt>"
+        results += "<dd>" + generateDom(scope.v) + "</dd>"
+
+        element.html(results)
+
+    {restrict: "E", link: link }
