@@ -32,12 +32,11 @@ directives.directive "showJson", ->
                                     <div class=\"panel-heading\">
                                         <h4 class=\"panel-title\">
                                             <a data-toggle=\"collapse\" data-parent=\"\#accordion#{accordion-collapse-id}\"
-                                             href=\"\#collapse#{accordion-collapse-id}\" class=\"collapsed\">#{key}</a>
+                                             href=\"\#collapse#{accordion-collapse-id}\" class=\"collapsed\"><i class=\"glyphicon glyphicon-eye-open\"></i> #{key}</a>
                                         </h4>
                                     </div>
                                     <div id=\"collapse#{accordion-collapse-id}\" class=\"panel-collapse collapse\">
                                         <div class=\"panel-body\">
-                                            <dt>#{key}</dt>
                                             <dd>#{generateDom value}</dd>
                                         </div>
                                     </div>
@@ -52,7 +51,7 @@ directives.directive "showJson", ->
             else
                 return r += v
 
-        results = generateDom scope.result
+        results = generateDom angular.copy(scope.result)
 
         element.html(results)
 

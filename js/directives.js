@@ -41,7 +41,7 @@
             if (typeof value === "object" && value !== null) {
               scope.accordionId++;
               accordionCollapseId = scope.$index + "-" + scope.accordionId;
-              r += "<div class=\"panel-group\" id=\"accordion" + accordionCollapseId + "\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionCollapseId + "\"href=\"#collapse" + accordionCollapseId + "\" class=\"collapsed\">" + key + "</a></h4></div><div id=\"collapse" + accordionCollapseId + "\" class=\"panel-collapse collapse\"><div class=\"panel-body\"><dt>" + key + "</dt><dd>" + generateDom(value) + "</dd></div></div></div></div>";
+              r += "<div class=\"panel-group\" id=\"accordion" + accordionCollapseId + "\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionCollapseId + "\"href=\"#collapse" + accordionCollapseId + "\" class=\"collapsed\"><i class=\"glyphicon glyphicon-eye-open\"></i> " + key + "</a></h4></div><div id=\"collapse" + accordionCollapseId + "\" class=\"panel-collapse collapse\"><div class=\"panel-body\"><dd>" + generateDom(value) + "</dd></div></div></div></div>";
             } else {
               r += "<dt>" + key + "</dt><dd>" + generateDom(value) + "</dd>";
             }
@@ -51,7 +51,7 @@
           return r += v;
         }
       };
-      results = generateDom(scope.result);
+      results = generateDom(angular.copy(scope.result));
       return element.html(results);
     };
     return {
