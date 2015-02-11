@@ -16,22 +16,43 @@ directives.directive "showJson", ->
 
     link = (scope,element,attrs) ->
 
+        scope.accordion-id = 0
+
         generateDom = (v) ->
             r = ""
             if typeof v == "object"
-                console.log v
                 r+='<dl>'
-                for key,value of v
-                    r += "<dt>" + key + "</dt>"
-                    r += "<dd>"
-                    r += generateDom value
-                    r += "</dd>"
+                for key, value of v
+                    if typeof value == "object" and value != null
+                        scope.accordion-id++
+                        accordion-collapse-id = scope.$index + "-" + scope.accordion-id
+                        r += "
+                            <div class=\"panel-group\" id=\"accordion#{accordion-collapse-id}\">
+                                <div class=\"panel panel-default\">
+                                    <div class=\"panel-heading\">
+                                        <h4 class=\"panel-title\">
+                                            <a data-toggle=\"collapse\" data-parent=\"\#accordion#{accordion-collapse-id}\"
+                                             href=\"\#collapse#{accordion-collapse-id}\" class=\"collapsed\">#{key}</a>
+                                        </h4>
+                                    </div>
+                                    <div id=\"collapse#{accordion-collapse-id}\" class=\"panel-collapse collapse\">
+                                        <div class=\"panel-body\">
+                                            <dt>#{key}</dt>
+                                            <dd>#{generateDom value}</dd>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        "
+                    else
+                        r += "<dt>#{key}</dt><dd>#{generateDom value}</dd>"
+                       
                 r+='</dl>'
+
             else
                 return r += v
 
-        results = "<dt>" + scope.k + "</dt>"
-        results += "<dd>" + generateDom(scope.v) + "</dd>"
+        results = generateDom scope.result
 
         element.html(results)
 

@@ -30,26 +30,28 @@
     var link;
     link = function(scope, element, attrs){
       var generateDom, results;
+      scope.accordionId = 0;
       generateDom = function(v){
-        var r, key, value;
+        var r, key, value, accordionCollapseId;
         r = "";
         if (typeof v === "object") {
-          console.log(v);
           r += '<dl>';
           for (key in v) {
             value = v[key];
-            r += "<dt>" + key + "</dt>";
-            r += "<dd>";
-            r += generateDom(value);
-            r += "</dd>";
+            if (typeof value === "object" && value !== null) {
+              scope.accordionId++;
+              accordionCollapseId = scope.$index + "-" + scope.accordionId;
+              r += "<div class=\"panel-group\" id=\"accordion" + accordionCollapseId + "\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionCollapseId + "\"href=\"#collapse" + accordionCollapseId + "\" class=\"collapsed\">" + key + "</a></h4></div><div id=\"collapse" + accordionCollapseId + "\" class=\"panel-collapse collapse\"><div class=\"panel-body\"><dt>" + key + "</dt><dd>" + generateDom(value) + "</dd></div></div></div></div>";
+            } else {
+              r += "<dt>" + key + "</dt><dd>" + generateDom(value) + "</dd>";
+            }
           }
           return r += '</dl>';
         } else {
           return r += v;
         }
       };
-      results = "<dt>" + scope.k + "</dt>";
-      results += "<dd>" + generateDom(scope.v) + "</dd>";
+      results = generateDom(scope.result);
       return element.html(results);
     };
     return {
