@@ -22,29 +22,30 @@ directives.directive "showJson", ->
             r = ""
             if typeof v == "object"
                 r+='<dl>'
-                for key, value of v
-                    if typeof value == "object" and value != null
-                        scope.accordion-id++
-                        accordion-collapse-id = scope.$index + "-" + scope.accordion-id
-                        r += "
-                            <div class=\"panel-group\" id=\"accordion#{accordion-collapse-id}\">
-                                <div class=\"panel panel-default\">
-                                    <div class=\"panel-heading\">
-                                        <h4 class=\"panel-title\">
-                                            <a data-toggle=\"collapse\" data-parent=\"\#accordion#{accordion-collapse-id}\"
-                                             href=\"\#collapse#{accordion-collapse-id}\" class=\"collapsed\"><i class=\"glyphicon glyphicon-eye-open\"></i> #{key}</a>
-                                        </h4>
-                                    </div>
-                                    <div id=\"collapse#{accordion-collapse-id}\" class=\"panel-collapse collapse\">
-                                        <div class=\"panel-body\">
-                                            <dd>#{generateDom value}</dd>
+                if v != null
+                    for i, key of Object.keys(v).sort!
+                        if typeof v[key] == "object" and v[key] != null
+                            scope.accordion-id++
+                            accordion-collapse-id = scope.$index + "-" + scope.accordion-id
+                            r += "
+                                <div class=\"panel-group\" id=\"accordion#{accordion-collapse-id}\">
+                                    <div class=\"panel panel-default\">
+                                        <div class=\"panel-heading\">
+                                            <h4 class=\"panel-title\">
+                                                <a data-toggle=\"collapse\" data-parent=\"\#accordion#{accordion-collapse-id}\"
+                                                 href=\"\#collapse#{accordion-collapse-id}\" class=\"collapsed\"><i class=\"glyphicon glyphicon-eye-open\"></i> #{key}</a>
+                                            </h4>
+                                        </div>
+                                        <div id=\"collapse#{accordion-collapse-id}\" class=\"panel-collapse collapse\">
+                                            <div class=\"panel-body\">
+                                                <dd>#{generateDom v[key]}</dd>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        "
-                    else
-                        r += "<dt>#{key}</dt><dd>#{generateDom value}</dd>"
+                            "
+                        else
+                            r += "<dt>#{key}</dt><dd>#{generateDom v[key]}</dd>"
                        
                 r+='</dl>'
 
