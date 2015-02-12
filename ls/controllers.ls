@@ -36,9 +36,9 @@ controllers.controller 'methodsCtrl', ['$scope' 'constants' 'ngProgress' 'mytool
                     ngProgress.complete()
                     $scope.errors[name] = response
             else
-                window.console.error "Client spore non initialisé ou mauvais paramètres"
+                window.console.error "Spore client not initialized or wrong parameters"
                 angular.element('#'+name+'-form>fieldset>.form-group').addClass('has-error')
-                $scope.errors[name] = "Spore client not initialized or wrong parameters"
+                $scope.errors[name] = {'error':"Spore client not initialized or wrong parameters"}
 
     @Menu = (name) ->
         $scope.hideResults=true
