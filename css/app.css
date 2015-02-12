@@ -63,6 +63,10 @@
    color:red;
 }
 
+.panel dl {
+    word-wrap:break-word;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
